@@ -1,0 +1,50 @@
+htlm
+<input id="guess" type="number" placeholder="Nhập số 1-100" />
+<button id="check">Đoán</button>
+<p id="result"></p>
+<p id="count"></p>
+
+<div class="fireworks"></div>
+css
+.fireworks {
+  width: 20px;
+  height: 20px;
+  background: red;
+  border-radius: 50%;
+  margin: 20px auto;
+  display: none;
+  animation: boom 0.5s infinite alternate;
+}
+
+@keyframes boom {
+  from { transform: scale(1); }
+  to { transform: scale(3); opacity: 0; }
+}
+JavaScript
+const number = Math.floor(Math.random() * 100) + 1;
+let attempts = 0;
+
+document.getElementById("check").onclick = () => {
+  const value = Number(document.getElementById("guess").value);
+  const result = document.getElementById("result");
+  const count = document.getElementById("count");
+
+  if (!value || value < 1 || value > 100) {
+    result.textContent = "Vui lòng nhập số từ 1 đến 100";
+    return;
+  }
+
+  attempts++;
+  count.textContent = `Số lần thử: ${attempts}`;
+
+  if (value > number) {
+    result.textContent = "Quá cao!";
+  } else if (value < number) {
+    result.textContent = "Quá thấp!";
+  } else {
+    result.textContent = "🎉 Chính xác!";
+    document.querySelector(".fireworks").style.display = "block";
+  }
+};
+giai thich
+    Math.floor(Math.random() * 100) + 1
